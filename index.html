@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<META NAME="Author" CONTENT="oscar999"> 
+		<meta name="format-detection" content="telephone=no" />
+		<meta content="email=no" name="format-detection" />
+		<title>无标题文档</title>
+		
+		<script src = "http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+		<script>
+		//jQuery下有个概念叫“类数组”，比如$( " li " )，当取到一个集合的时候，会有数组的一些属性，但是instancseof Array仍然是false。但是var a=$( "li" ).get（）这样处理一下，然后instancseof Array就返回true。
+		
+		// map（）的功能主要有两步，第一步就是遍历，第二步就是替换。
+		//   $( " li " ).map( function(  ){
+    	//       return  $(this).text(  );  // 注意return关键字不可少
+		//	 } )
+			 
+		// map先遍历，每一项都返回一个text（）值，然后map会将这些值自动去替换$("li")集合的每一项值，所以这个时候还是个类数组（因为还是$(" li ")的壳子），不是个真正的数组。于是后面加个get（）操作就变成真正的数组了，于是可以用join（）这样专属于数组的方法。 
+
+		$(function() {
+		    var $inventory = $("#inventory");
+		    var prices = $inventory
+		    // 获取 table 中每行第三个 td
+		    .find('td:nth-child(3)')
+		    // 使用 map 对每一个 td 进行处理
+		    // function 为回调函数, index 为键值
+		    // qty 为每个元素中的此元素
+		    // 此回调函数返回每个元素的 text
+		    // map 将返回对象集合
+		    // Object["￥200", "￥260", "￥130"]
+		    .map(function(index, qty) {
+		        return $(qty).text();
+		    })
+		    // 将对象集合转换为数组
+		    .get();
+		             
+		    // 数组：["￥200", "￥260", "￥130"]
+		    console.log(prices);
+		});
+		</script>
+	</head>
+
+
+<body>
+	<table border="1" id="inventory">
+		<tr><td>iPhone</td><td>4</td><td>￥200</td></tr>
+		<tr><td>iPhone</td><td>5</td><td>￥260</td></tr>
+		<tr><td>iPhone</td><td>6</td><td>￥130</td></tr>
+	</table>
+</body>
+</html>

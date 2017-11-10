@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<META NAME="Author" CONTENT="oscar999"> 
+		<meta name="format-detection" content="telephone=no" />
+		<meta content="email=no" name="format-detection" />
+		<title>无标题文档</title>
+		
+		<script src = "http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+		<script>
+//一、
+	function CreatePerson2(name,qq){
+        //原料
+        //系统偷偷替咱们做；
+        //var this = new Object();  //obj 对象
+
+        //加工
+        this.name = name;  //name 属性
+        this.qq = qq;
+
+        //出厂
+        //也偷偷返回this，
+        //return this;
+    }
+
+    CreatePerson2.prototype.showName = function(){      //showName 原型方法
+        console.log("我的名字叫：" + this.name);
+    }
+
+    CreatePerson2.prototype.showQq = function(){      //showQq 原型方法
+        console.log("我的QQ号：" + this.qq);
+    }
+
+    var obj5 = new CreatePerson2("孙八","1121242344");
+    obj5.showName();
+    obj5.showQq();
+
+    var obj6 = new CreatePerson2("李九","102154144");
+    obj6.showName();
+    obj6.showQq();
+
+    console.log(obj5.showName == obj6.showName); //true
+
+    var a = a > 1;
+
+    console.log(a);
+    var c = obj5.showName;
+    var d = obj6.showName;
+
+    if( a == 2 && a == 3){
+    	console.log(1);
+    }else{
+    	console.log(2);
+    }
+
+
+//二、
+
+var a = {n:1};
+var b = a;
+a.x = a = {n:2};
+console.log(a.x)
+console.log(a===b.x);
+//http://www.cnblogs.com/xxcanghai/p/4998076.html
+
+
+//三、
+
+function Foo() {
+    getName = function () { console.log (1); };
+    return this;
+}
+Foo.getName = function () { console.log (2);};
+Foo.prototype.getName = function () { console.log (3);};
+var getName = function () { console.log (4);};
+function getName() { console.log (5);}
+
+//请写出以下输出结果：
+Foo.getName(); //2
+getName();//4
+Foo().getName();//1
+getName();//1
+new Foo.getName();//2  new (Foo.getName)();
+new Foo().getName();//3  (new Foo()).getName()
+new new Foo().getName();//3
+
+
+console.log(x);//输出：function x(){}
+var x=1;
+function x(){}
+//http://www.cnblogs.com/xxcanghai/p/5189353.html#
+
+
+
+function fun(n,o) {
+  console.log(o)
+  return {
+    fun:function(m){
+      return fun(m,n);
+    }
+  };
+}
+var a = fun(0);  a.fun(1);  a.fun(2);  a.fun(3);//undefined,0,0,0
+var b = fun(0).fun(1).fun(2).fun(3);//undefined,0,1,2
+var c = fun(0).fun(1);  c.fun(2);  c.fun(3);//undefined,0,1,1
+//问:三行a,b,c的输出分别是什么？
+		</script>
+	</head>
+	
+
+
+<body>
+
+</body>
+</html>
